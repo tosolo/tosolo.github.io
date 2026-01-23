@@ -6,11 +6,16 @@
   <style>
     body {
       background: #000;
-      color: #ccc;
+      color: #fff;
       font-family: Consolas, "Courier New", monospace;
       margin: 0;
       padding: 0;
       font-size: 14px;
+    }
+
+    a {
+      color: #fff;
+      text-decoration: underline;
     }
 
     .wrap {
@@ -27,25 +32,9 @@
     }
 
     .sub {
-      color: #999;
+      color: #fff;
       margin-bottom: 12px;
       font-size: 12px;
-    }
-
-    .nav {
-      border-bottom: 1px solid #444;
-      padding-bottom: 4px;
-      margin-bottom: 12px;
-    }
-
-    .nav a {
-      color: #0f0;
-      text-decoration: none;
-      margin-right: 8px;
-    }
-
-    .nav a:hover {
-      text-decoration: underline;
     }
 
     .projects .item {
@@ -56,6 +45,7 @@
 
     .item-title {
       color: #fff;
+      font-weight: bold;
     }
 
     .status {
@@ -63,14 +53,17 @@
       font-size: 12px;
     }
 
-    .cmd-links a {
-      color: #0af;
-      text-decoration: none;
-      margin-right: 6px;
+    .tagline {
+      color: #fff;
+      font-size: 12px;
+      margin: 2px 0 6px;
     }
 
-    .cmd-links a:hover {
+    .cmd-links a {
+      color: #0af;               /* google / apple only */
       text-decoration: underline;
+      display: inline-block;
+      margin-right: 8px;
     }
 
     .ascii-box {
@@ -81,6 +74,24 @@
       display: inline-block;
       margin-right: 10px;
       margin-bottom: 6px;
+
+      width: 80px;
+      height: 80px;
+      overflow: hidden;
+      vertical-align: top;
+    }
+
+    .ascii-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;        /* keep aspect ratio */
+      image-rendering: pixelated; /* extra retro */
+    }
+
+    .game-info {
+      display: inline-block;
+      vertical-align: top;
+      max-width: 580px;
     }
 
     footer {
@@ -88,19 +99,13 @@
       margin-top: 10px;
       padding-top: 6px;
       font-size: 12px;
-      color: #777;
+      color: #fff;
       display: flex;
       justify-content: space-between;
     }
 
     footer a {
-      color: #0af;
-      text-decoration: none;
       margin-right: 6px;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
     }
   </style>
 </head>
@@ -117,30 +122,29 @@
    ╚═╝    ╚═════╝ ╚══════╝ ╚═════╝ ╚══════╝ ╚═════╝ 
 </pre>
 
-<div class="sub">to solo it. alone. one game at a time.</div>
-
-<div class="nav">
-  [ <a href="#">Games</a> ]
-  [ <a href="terms.html">Terms</a> ]
-  [ <a href="privacy.html">Privacy</a> ]
-</div>
+<div class="sub">Welcome to my page! Have a good day :)</div>
 
 <div class="projects">
 
   <!-- Frog Domino -->
   <div class="item">
     <div class="ascii-box">
-/\_/\
-( o.o )
- > ^ <
+      <img src="frog-domino-icon.png" alt="Frog Domino icon">
     </div>
-    <span class="item-title">Frog Domino</span>
-    <span class="status">(released)</span>
 
-    <div class="cmd-links">
-      <!-- Replace these later -->
-      <a href="GOOGLE_URL">google</a>
-      <a href="APPLE_URL">apple</a>
+    <div class="game-info">
+      <span class="item-title">Frog Domino</span>
+      <span class="status">(released)</span>
+
+      <div class="tagline">
+        Position the frogs to jump into the water in one take!
+      </div>
+
+      <div class="cmd-links">
+        <!-- Replace these with your real store URLs -->
+        <a href="GOOGLE_URL" target="_blank" rel="noopener">google</a>
+        <a href="APPLE_URL" target="_blank" rel="noopener">apple</a>
+      </div>
     </div>
   </div>
 
@@ -152,8 +156,11 @@
 ▒soon ▒
 ▒▒▒▒▒▒▒▒
     </div>
-    <span class="item-title">Another Game</span>
-    <span class="status">(in dev)</span>
+
+    <div class="game-info">
+      <span class="item-title">Another Game</span>
+      <span class="status">(in dev)</span>
+    </div>
   </div>
 
 </div>
