@@ -27,7 +27,7 @@
 
     .ascii-logo {
       white-space: pre;
-      color: #0f0;
+      color: #fff;        /* <-- change requested */
       margin-bottom: 4px;
     }
 
@@ -46,21 +46,24 @@
     .item-title {
       color: #fff;
       font-weight: bold;
+      display: inline-block;
+      margin-bottom: 4px;   /* <-- new spacing */
     }
 
     .status {
-      color: #0f0;
+      color: #0f0;          /* retro status */
       font-size: 12px;
+      margin-left: 4px;
     }
 
     .tagline {
       color: #fff;
       font-size: 12px;
-      margin: 2px 0 6px;
+      margin: 4px 0 6px;
     }
 
     .cmd-links a {
-      color: #0af;               /* google / apple only */
+      color: #0af;          /* google / apple */
       text-decoration: underline;
       display: inline-block;
       margin-right: 8px;
@@ -84,8 +87,8 @@
     .ascii-box img {
       width: 100%;
       height: 100%;
-      object-fit: contain;        /* keep aspect ratio */
-      image-rendering: pixelated; /* extra retro */
+      object-fit: contain;
+      image-rendering: pixelated;
     }
 
     .game-info {
@@ -129,7 +132,7 @@
   <!-- Frog Domino -->
   <div class="item">
     <div class="ascii-box">
-      <img src="frog-domino-icon.png" alt="Frog Domino icon">
+      <img src="frog_domino_icon.png" alt="Frog Domino icon">
     </div>
 
     <div class="game-info">
@@ -141,14 +144,13 @@
       </div>
 
       <div class="cmd-links">
-        <!-- Replace these with your real store URLs -->
         <a href="GOOGLE_URL" target="_blank" rel="noopener">google</a>
         <a href="APPLE_URL" target="_blank" rel="noopener">apple</a>
       </div>
     </div>
   </div>
 
-  <!-- Another Game -->
+  <!-- Next Project -->
   <div class="item">
     <div class="ascii-box">
 ▒▒▒▒▒▒▒▒
@@ -158,7 +160,7 @@
     </div>
 
     <div class="game-info">
-      <span class="item-title">Another Game</span>
+      <span class="item-title">Next Project</span>
       <span class="status">(in dev)</span>
     </div>
   </div>
