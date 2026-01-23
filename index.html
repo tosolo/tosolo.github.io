@@ -1,379 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>tosolo projects</title>
+  <meta charset="UTF-8">
+  <title>tosolo — games</title>
   <style>
-    html, body {
+    body {
+      background: #000;
+      color: #ccc;
+      font-family: Consolas, "Courier New", monospace;
       margin: 0;
       padding: 0;
-      background:
-        radial-gradient(circle at top left, #28313b, #0b1116 60%),
-        repeating-linear-gradient(
-          90deg,
-          rgba(255,255,255,0.03) 0px,
-          rgba(255,255,255,0.03) 1px,
-          transparent 1px,
-          transparent 3px
-        );
-      color: #e5e2d5;
-      font-family: "Courier New", monospace;
-    }
-
-    .crt-overlay {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background: repeating-linear-gradient(
-        180deg,
-        rgba(0,0,0,0.45) 0px,
-        rgba(0,0,0,0.45) 1px,
-        rgba(0,0,0,0.3) 1px,
-        rgba(0,0,0,0.3) 3px
-      );
-      mix-blend-mode: soft-light;
-      opacity: 0.6;
-      z-index: 999;
+      font-size: 14px;
     }
 
     .wrap {
-      max-width: 880px;
-      margin: 32px auto 40px;
-      border-radius: 10px;
-      border: 3px solid #94663f;
-      box-shadow:
-        0 0 0 3px #151515,
-        0 0 40px #000;
-      background:
-        linear-gradient(#182029, #10151c 60%, #171b22);
-      padding: 0;
-      overflow: hidden;
+      width: 720px;
+      margin: 20px auto;
+      padding: 10px;
+      border: 1px solid #444;
     }
 
-    header {
-      padding: 18px 24px 8px;
-      border-bottom: 2px groove #c77d36;
-      background:
-        radial-gradient(circle at top, #37455a, #1b2330 65%, #131923);
-    }
-
-    .logo {
-      color: #ffeb9c;
-      text-shadow: 0 0 4px #f4e39a, 0 0 10px #f0a93f;
-      font-size: 14px;
-      line-height: 1.1;
+    .ascii-logo {
       white-space: pre;
-    }
-
-    .subtitle {
-      margin-top: 8px;
-      font-size: 12px;
-      color: #f5dcb0;
-    }
-
-    .subtitle .cursor {
-      animation: blink 1s step-end infinite;
-    }
-
-    @keyframes blink {
-      50% { opacity: 0; }
-    }
-
-    .body-layout {
-      display: grid;
-      grid-template-columns: 180px 1fr;
-      min-height: 340px;
-    }
-
-    nav {
-      border-right: 2px ridge #835530;
-      background:
-        linear-gradient(#171f28, #141820 50%, #171820);
-      padding: 12px 8px 16px;
-      font-size: 12px;
-    }
-
-    .nav-title {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #ffcb7b;
-      margin-bottom: 8px;
-      border-bottom: 1px solid #704526;
-      padding-bottom: 3px;
-    }
-
-    .nav-item {
-      display: block;
-      padding: 4px 6px;
-      color: #e5e2d5;
-      text-decoration: none;
-      border-radius: 3px;
+      color: #0f0;
       margin-bottom: 4px;
-      border: 1px solid transparent;
-    }
-    .nav-item span {
-      color: #ffdf9a;
-    }
-    .nav-item:hover {
-      border-color: #c27b38;
-      background: radial-gradient(circle at left, #313b4b, #171b23);
     }
 
-    main {
-      padding: 14px 18px 18px;
-      font-size: 13px;
+    .sub {
+      color: #999;
+      margin-bottom: 12px;
+      font-size: 12px;
     }
 
-    .intro {
+    .nav {
+      border-bottom: 1px solid #444;
+      padding-bottom: 4px;
+      margin-bottom: 12px;
+    }
+
+    .nav a {
+      color: #0f0;
+      text-decoration: none;
+      margin-right: 8px;
+    }
+
+    .nav a:hover {
+      text-decoration: underline;
+    }
+
+    .projects .item {
+      border: 1px solid #444;
+      padding: 6px;
       margin-bottom: 10px;
-      color: #f1e6cf;
     }
 
-    .intro p {
-      margin: 2px 0;
-    }
-
-    .section-title {
-      margin: 8px 0 4px;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #ffcb7b;
-      border-bottom: 1px solid #80512c;
-      padding-bottom: 3px;
-    }
-
-    .projects {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 6px;
-    }
-
-    .card {
-      display: grid;
-      grid-template-columns: 72px 1fr;
-      gap: 10px;
-      padding: 8px 9px;
-      border-radius: 6px;
-      border: 2px groove #8b5a2b;
-      background: radial-gradient(circle at top left,#273144,#151922);
-    }
-
-    .card-header {
-      font-size: 13px;
-      color: #fff7c7;
-      text-shadow: 0 0 4px #c78334;
-      margin-bottom: 2px;
-    }
-
-    .card-tagline {
-      font-size: 11px;
-      color: #d7ceb7;
-      margin-bottom: 4px;
-    }
-
-    .card-links {
-      font-size: 11px;
-      margin-top: 4px;
-    }
-
-    .card-links a {
-      color: #9ad3ff;
-      text-decoration: none;
-      border-bottom: 1px dotted #9ad3ff;
-      margin-right: 10px;
-    }
-    .card-links a:hover {
+    .item-title {
       color: #fff;
     }
 
-    .icon-box {
-      border-radius: 4px;
-      border: 1px solid #c28847;
-      background: #111;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 4px;
-      position: relative;
-      overflow: hidden;
+    .status {
+      color: #0f0;
+      font-size: 12px;
     }
 
-    .icon-box img {
-      max-width: 100%;
-      max-height: 64px;
-      display: block;
+    .cmd-links a {
+      color: #0af;
+      text-decoration: none;
+      margin-right: 6px;
     }
 
-    .icon-ascii {
-      position: absolute;
-      inset: 4px;
-      font-size: 8px;
-      color: rgba(255,240,200,0.15);
+    .cmd-links a:hover {
+      text-decoration: underline;
+    }
+
+    .ascii-box {
       white-space: pre;
-      pointer-events: none;
-    }
-
-    .status-pill {
+      color: #666;
+      border: 1px solid #333;
+      padding: 4px;
       display: inline-block;
-      font-size: 10px;
-      padding: 1px 6px;
-      border-radius: 999px;
-      border: 1px solid #e0c37a;
-      background: #3a2b11;
-      color: #ffe7a6;
-      margin-left: 4px;
+      margin-right: 10px;
+      margin-bottom: 6px;
     }
 
     footer {
-      border-top: 2px groove #c27b38;
-      padding: 6px 10px 7px;
-      font-size: 11px;
-      background: #080b0f;
+      border-top: 1px solid #444;
+      margin-top: 10px;
+      padding-top: 6px;
+      font-size: 12px;
+      color: #777;
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      color: #d2c6aa;
     }
 
     footer a {
-      color: #ffe39e;
+      color: #0af;
       text-decoration: none;
-      margin-right: 10px;
+      margin-right: 6px;
     }
+
     footer a:hover {
-      color: #ffffff;
-    }
-
-    .footer-right {
-      font-size: 10px;
-      opacity: 0.8;
-    }
-
-    @media (max-width: 720px) {
-      .body-layout {
-        grid-template-columns: 1fr;
-      }
-      nav {
-        border-right: none;
-        border-bottom: 2px ridge #835530;
-      }
-      .wrap {
-        margin: 10px;
-      }
+      text-decoration: underline;
     }
   </style>
 </head>
+
 <body>
 <div class="wrap">
-  <header>
-<pre class="logo">
-████████╗ ██████╗ ███████╗ ██████╗ ██╗      ██████╗ 
-╚══██╔══╝██╔═══██╗██╔════╝██╔═══██╗██║     ██╔═══██╗
-   ██║   ██║   ██║███████╗██║   ██║██║     ██║   ██║
-   ██║   ██║   ██║╚════██║██║   ██║██║     ██║   ██║
-   ██║   ╚██████╔╝███████║╚██████╔╝███████╗╚██████╔╝
-   ╚═╝    ╚═════╝ ╚══════╝ ╚═════╝ ╚══════╝ ╚═════╝ 
+
+<pre class="ascii-logo">
+   _____           _       
+  |_   _|__   ___ | | ___  
+    | |/ _ \ / _ \| |/ _ \ 
+    | | (_) | (_) | |  __/ 
+    |_|\___/ \___/|_|\___| 
 </pre>
-    <div class="subtitle">
-      thank you for visiting my projects_ <span class="cursor">▌</span>
-    </div>
-  </header>
 
-  <div class="body-layout">
-    <nav>
-      <div class="nav-title">navigation</div>
-      <a class="nav-item" href="#">
-        ▸ <span>Home</span>
-      </a>
-      <a class="nav-item" href="terms.html">
-        ▸ Terms of Service
-      </a>
-      <a class="nav-item" href="privacy.html">
-        ▸ Privacy Policy
-      </a>
-    </nav>
+<div class="sub">to solo it. alone. one game at a time.</div>
 
-    <main>
-      <div class="intro">
-        <p>Thank you for visiting my projects!</p>
-        <p>Hope you have a good time playing my games :)</p>
-      </div>
-
-      <div class="section-title">Games</div>
-      <div class="projects">
-
-        <!-- Frog Domino -->
-        <section class="card">
-          <div class="icon-box">
-            <!-- Replace APP_ICON_URL with your real icon URL -->
-            <img src="APP_ICON_URL" alt="Frog Domino icon" />
-            <div class="icon-ascii">
-/\_/\
-( o.o )
-> ^ <
-            </div>
-          </div>
-          <div>
-            <div class="card-header">
-              Frog Domino <span class="status-pill">released</span>
-            </div>
-            <div class="card-tagline">
-              Chill mobile puzzle about frogs and domino-like moves.
-            </div>
-            <div class="card-links">
-              <!-- Replace these with your store URLs -->
-              <a href="GOOGLE_PLAY_URL" target="_blank" rel="noopener">Google Play</a>
-              <a href="APPLE_STORE_URL" target="_blank" rel="noopener">App Store</a>
-            </div>
-          </div>
-        </section>
-
-        <!-- Another Game (in development) -->
-        <section class="card">
-          <div class="icon-box">
-            <div class="icon-ascii">
-▒▒▒▒▒▒▒▒
-▒ coming▒
-▒  soon ▒
-▒▒▒▒▒▒▒▒
-            </div>
-          </div>
-          <div>
-            <div class="card-header">
-              Another Game <span class="status-pill">in development</span>
-            </div>
-            <div class="card-tagline">
-              Next tiny project by tosolo.  
-              Check back later for more info.
-            </div>
-            <div class="card-links">
-              <span>no store links yet</span>
-            </div>
-          </div>
-        </section>
-
-      </div>
-    </main>
-  </div>
-
-  <footer>
-    <div>
-      <a href="terms.html">Terms of Service</a>
-      <a href="privacy.html">Privacy Policy</a>
-    </div>
-    <div class="footer-right">
-      © <span id="year"></span> tosolo — applies to all current & future games.
-    </div>
-  </footer>
+<div class="nav">
+  [ <a href="#">Games</a> ]
+  [ <a href="terms.html">Terms</a> ]
+  [ <a href="privacy.html">Privacy</a> ]
 </div>
 
-<div class="crt-overlay"></div>
+<div class="projects">
+
+  <!-- Frog Domino -->
+  <div class="item">
+    <div class="ascii-box">
+/\_/\
+( o.o )
+ > ^ <
+    </div>
+    <span class="item-title">Frog Domino</span>
+    <span class="status">(released)</span>
+
+    <div class="cmd-links">
+      <!-- Replace these later -->
+      <a href="GOOGLE_URL">google</a>
+      <a href="APPLE_URL">apple</a>
+    </div>
+  </div>
+
+  <!-- Another Game -->
+  <div class="item">
+    <div class="ascii-box">
+▒▒▒▒▒▒▒▒
+▒coming▒
+▒soon ▒
+▒▒▒▒▒▒▒▒
+    </div>
+    <span class="item-title">Another Game</span>
+    <span class="status">(in dev)</span>
+  </div>
+
+</div>
+
+<footer>
+  <div>
+    <a href="terms.html">Terms</a>
+    <a href="privacy.html">Privacy</a>
+  </div>
+  <div>© <span id="year"></span> tosolo</div>
+</footer>
+</div>
 
 <script>
-  // year
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 </body>
