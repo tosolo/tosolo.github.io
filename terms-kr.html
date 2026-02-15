@@ -1,44 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>tosolo — terms</title>
   <style>
-    body {
-      background: #000;
-      color: #fff;
-      font-family: Consolas, "Courier New", monospace;
-      margin: 0;
-      padding: 0;
-      font-size: 14px;
+    :root {
+      --bg: #232323;
+      --surface: #363636;
+      --border: #4a4a4a;
+      --text: #e0e0e0;
+      --text-dim: #999;
     }
 
-    a {
-      color: #fff;
-      text-decoration: underline;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      padding: 40px 20px;
     }
 
     .wrap {
-      width: 720px;
-      margin: 20px auto;
-      padding: 10px;
-      border: 1px solid #444;
+      max-width: 720px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
     }
 
     .nav-top {
-      font-size: 12px;
-      margin-bottom: 10px;
+      font-size: 13px;
+      margin-bottom: 24px;
+      color: var(--text-dim);
     }
 
+    .nav-top a {
+      color: var(--text-dim);
+      text-decoration: none;
+      margin-right: 16px;
+      transition: color 0.2s;
+    }
+
+    .nav-top a:hover { color: var(--text); }
+
     .title {
-      font-weight: bold;
-      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 22px;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
     }
 
     .text-block {
-      white-space: pre-wrap;  /* ENTER = newline */
-      line-height: 1.4;
-      font-size: 13px;
+      white-space: pre-wrap;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-dim);
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 16px; }
+      .wrap { padding: 20px; border-radius: 8px; }
+      .title { font-size: 18px; }
+      .text-block { font-size: 13px; }
     }
   </style>
 </head>
@@ -47,18 +76,18 @@
 <div class="wrap">
 
   <div class="nav-top">
-    [ <a href="https://tosolo.github.io">home</a> ] 
-    [ <a href="terms.html">english</a> ] 
-    [ <a href="terms-kr.html">한국어</a> ]
+    <a href="https://tosolo.github.io">Home</a>
+    <a href="terms.html">English</a>
+    <a href="terms-kr.html">한국어</a>
   </div>
 
   <div class="title">이용약관</div>
 
   <div class="text-block">
-제공자: Tosolo (“개발자”)
-서비스: Frog Domino (“게임”)
+제공자: Tosolo ("개발자")
+서비스: Frog Domino ("게임")
 연령: 전연령(Everyone)
-문의: realkevin1995@gmail.com
+문의: tosolo.dev@gmail.com
 준거법: 대한민국 법
 발효일: 게시 시점부터 적용
 
@@ -106,11 +135,11 @@
 (3) 서비스 종료에 따른 환불 또는 손해배상은 제공되지 않습니다(고의 또는 중과실이 있는 경우 제외).
 
 11. 면책
-(1) 게임은 “현 상태 그대로(As-Is)” 제공됩니다.
+(1) 게임은 "현 상태 그대로(As-Is)" 제공됩니다.
 (2) 개발자는 서비스 중단, 오류, 데이터 손실 등으로 인한 손해에 대해 고의 또는 중과실이 없는 한 책임지지 않습니다.
 
 12. 개인정보
-개인정보 처리 방식은 별도의 **개인정보처리방침(Privacy Policy)**에 따릅니다.
+개인정보 처리 방식은 별도의 개인정보처리방침(Privacy Policy)에 따릅니다.
 
 13. 약관 변경
 (1) 개발자는 필요 시 본 약관을 개정할 수 있습니다.
