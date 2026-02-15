@@ -2,43 +2,72 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>tosolo — terms</title>
   <style>
-    body {
-      background: #000;
-      color: #fff;
-      font-family: Consolas, "Courier New", monospace;
-      margin: 0;
-      padding: 0;
-      font-size: 14px;
+    :root {
+      --bg: #232323;
+      --surface: #363636;
+      --border: #4a4a4a;
+      --text: #e0e0e0;
+      --text-dim: #999;
     }
 
-    a {
-      color: #fff;
-      text-decoration: underline;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      padding: 40px 20px;
     }
 
     .wrap {
-      width: 720px;
-      margin: 20px auto;
-      padding: 10px;
-      border: 1px solid #444;
+      max-width: 720px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
     }
 
     .nav-top {
-      font-size: 12px;
-      margin-bottom: 10px;
+      font-size: 13px;
+      margin-bottom: 24px;
+      color: var(--text-dim);
     }
 
+    .nav-top a {
+      color: var(--text-dim);
+      text-decoration: none;
+      margin-right: 16px;
+      transition: color 0.2s;
+    }
+
+    .nav-top a:hover { color: var(--text); }
+
     .title {
-      font-weight: bold;
-      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 22px;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
     }
 
     .text-block {
-      white-space: pre-wrap;  /* ENTER = newline */
-      line-height: 1.4;
-      font-size: 13px;
+      white-space: pre-wrap;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-dim);
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 16px; }
+      .wrap { padding: 20px; border-radius: 8px; }
+      .title { font-size: 18px; }
+      .text-block { font-size: 13px; }
     }
   </style>
 </head>
@@ -47,17 +76,17 @@
 <div class="wrap">
 
   <div class="nav-top">
-    [ <a href="https://tosolo.github.io">home</a> ] 
-    [ <a href="terms.html">english</a> ] 
-    [ <a href="terms-kr.html">한국어</a> ]
+    <a href="https://tosolo.github.io">Home</a>
+    <a href="terms.html">English</a>
+    <a href="terms-kr.html">한국어</a>
   </div>
 
   <div class="title">Terms of Service</div>
 
   <div class="text-block">
-Provider: Tosolo (“Developer”)
-Service: (“Game”) Frog Domino
-Contact: realkevin1995@gmail.com
+Provider: Tosolo ("Developer")
+Service: ("Game") Frog Domino
+Contact: tosolo.dev@gmail.com
 Governing Law: Republic of Korea
 Effective Date: Upon publication
 
@@ -77,12 +106,12 @@ The Game is intended for general audiences; however, age ratings may vary by reg
 (2) Users are responsible for managing their own accounts and login credentials.
 
 5. Paid Item: Remove Ads (Permanent)
-(1) “Remove Ads” is a permanent digital item that takes effect immediately upon purchase and removes advertisements within the Game.
+(1) "Remove Ads" is a permanent digital item that takes effect immediately upon purchase and removes advertisements within the Game.
 (2) The purchase of Remove Ads does not guarantee the continued availability of the Game or of any account.
 (3) In the event of Game discontinuation, deletion, or removal from stores, no refunds or compensation shall be provided for Remove Ads or any other purchased digital items.
 
 6. Payments and Refunds
-(1) All payment, cancellation, and refund processes are governed by the respective policies of Google Play and Apple App Store (collectively, “Stores”).
+(1) All payment, cancellation, and refund processes are governed by the respective policies of Google Play and Apple App Store (collectively, "Stores").
 (2) The Developer does not provide direct refunds beyond Store policies.
 (3) Local consumer protection laws may apply where applicable.
 
@@ -106,7 +135,7 @@ All content within the Game (code, graphics, audio, and other materials) is owne
 (3) No refunds or damages will be provided as a result of service termination, except where required by applicable law.
 
 11. Warranty Disclaimer
-The Game is provided on an “as-is” and “as-available” basis without any warranties of any kind.
+The Game is provided on an "as-is" and "as-available" basis without any warranties of any kind.
 The Developer disclaims liability for interruptions, errors, or data loss except in cases of willful misconduct or gross negligence.
 
 12. Privacy and Data
