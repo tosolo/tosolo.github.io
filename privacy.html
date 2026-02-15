@@ -2,43 +2,72 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>tosolo — privacy</title>
   <style>
-    body {
-      background: #000;
-      color: #fff;
-      font-family: Consolas, "Courier New", monospace;
-      margin: 0;
-      padding: 0;
-      font-size: 14px;
+    :root {
+      --bg: #232323;
+      --surface: #363636;
+      --border: #4a4a4a;
+      --text: #e0e0e0;
+      --text-dim: #999;
     }
 
-    a {
-      color: #fff;
-      text-decoration: underline;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      padding: 40px 20px;
     }
 
     .wrap {
-      width: 720px;
-      margin: 20px auto;
-      padding: 10px;
-      border: 1px solid #444;
+      max-width: 720px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
     }
 
     .nav-top {
-      font-size: 12px;
-      margin-bottom: 10px;
+      font-size: 13px;
+      margin-bottom: 24px;
+      color: var(--text-dim);
     }
 
+    .nav-top a {
+      color: var(--text-dim);
+      text-decoration: none;
+      margin-right: 16px;
+      transition: color 0.2s;
+    }
+
+    .nav-top a:hover { color: var(--text); }
+
     .title {
-      font-weight: bold;
-      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 22px;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
     }
 
     .text-block {
-      white-space: pre-wrap;  /* ENTER = newline */
-      line-height: 1.4;
-      font-size: 13px;
+      white-space: pre-wrap;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-dim);
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 16px; }
+      .wrap { padding: 20px; border-radius: 8px; }
+      .title { font-size: 18px; }
+      .text-block { font-size: 13px; }
     }
   </style>
 </head>
@@ -47,17 +76,17 @@
 <div class="wrap">
 
   <div class="nav-top">
-    [ <a href="https://tosolo.github.io">home</a> ] 
-    [ <a href="privacy.html">english</a> ] 
-    [ <a href="privacy-kr.html">한국어</a> ]
+    <a href="https://tosolo.github.io">Home</a>
+    <a href="privacy.html">English</a>
+    <a href="privacy-kr.html">한국어</a>
   </div>
 
   <div class="title">Privacy Policy</div>
 
   <div class="text-block">
-Provider: Tosolo (“Developer”)
-Service: Frog Domino (“Game”)
-Contact: realkevin1995@gmail.com
+Provider: Tosolo ("Developer")
+Service: Frog Domino ("Game")
+Contact: tosolo.dev@gmail.com
 Effective Date: Upon publication
 
 1. Information We Collect
@@ -103,23 +132,23 @@ The Developer does not process refunds directly.
 The Game may use Firebase Analytics for statistics, retention, and crash reporting.
 Data may be processed in aggregated or pseudonymized form depending on region and laws.
 
-8. Children’s Privacy
+8. Children's Privacy
 The Game is intended for general audiences.
 In regions where parental consent requirements apply (e.g., EU/US child privacy laws), parental authorization may be required.
 
 9. User Rights (GDPR & Equivalent Laws)
 Where applicable (especially EU/EEA):
 Users may request: access, correction, deletion, restriction, or objection to processing, and data portability.
-Requests may be submitted via: realkevin1995@gmail.com
+Requests may be submitted via: tosolo.dev@gmail.com
 
 10. CCPA Notice (California/US)
 For California residents:
-(1) The Developer does not “sell” personal information as defined under CCPA.
+(1) The Developer does not "sell" personal information as defined under CCPA.
 (2) Users may request disclosure or deletion of personal information via email.
 (3) The Developer will not discriminate against users for exercising CCPA rights.
 
 11. International Data Transfers
-Data may be processed on servers located outside the user’s country, including the United States, the European Union, or other jurisdictions.
+Data may be processed on servers located outside the user's country, including the United States, the European Union, or other jurisdictions.
 Appropriate measures will be applied based on applicable laws.
 
 12. Security Measures
@@ -138,7 +167,7 @@ This Policy may be updated occasionally.
 Continued use of the Game following an update constitutes acceptance of the updated Policy.
 
 16. Contact
-For privacy-related inquiries: realkevin1995@gmail.com
+For privacy-related inquiries: tosolo.dev@gmail.com
   </div>
 
 </div>
