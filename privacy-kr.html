@@ -1,44 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>tosolo — privacy</title>
   <style>
-    body {
-      background: #000;
-      color: #fff;
-      font-family: Consolas, "Courier New", monospace;
-      margin: 0;
-      padding: 0;
-      font-size: 14px;
+    :root {
+      --bg: #232323;
+      --surface: #363636;
+      --border: #4a4a4a;
+      --text: #e0e0e0;
+      --text-dim: #999;
     }
 
-    a {
-      color: #fff;
-      text-decoration: underline;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      padding: 40px 20px;
     }
 
     .wrap {
-      width: 720px;
-      margin: 20px auto;
-      padding: 10px;
-      border: 1px solid #444;
+      max-width: 720px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
     }
 
     .nav-top {
-      font-size: 12px;
-      margin-bottom: 10px;
+      font-size: 13px;
+      margin-bottom: 24px;
+      color: var(--text-dim);
     }
 
+    .nav-top a {
+      color: var(--text-dim);
+      text-decoration: none;
+      margin-right: 16px;
+      transition: color 0.2s;
+    }
+
+    .nav-top a:hover { color: var(--text); }
+
     .title {
-      font-weight: bold;
-      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 22px;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
     }
 
     .text-block {
-      white-space: pre-wrap;  /* ENTER = newline */
-      line-height: 1.4;
-      font-size: 13px;
+      white-space: pre-wrap;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-dim);
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 16px; }
+      .wrap { padding: 20px; border-radius: 8px; }
+      .title { font-size: 18px; }
+      .text-block { font-size: 13px; }
     }
   </style>
 </head>
@@ -47,17 +76,17 @@
 <div class="wrap">
 
   <div class="nav-top">
-    [ <a href="https://tosolo.github.io">home</a> ] 
-    [ <a href="privacy.html">english</a> ] 
-    [ <a href="privacy-kr.html">한국어</a> ]
+    <a href="https://tosolo.github.io">Home</a>
+    <a href="privacy.html">English</a>
+    <a href="privacy-kr.html">한국어</a>
   </div>
 
   <div class="title">개인정보처리방침</div>
 
   <div class="text-block">
 제공자: Tosolo(개발자)
-서비스: Frog Domino(이하 “게임”)
-문의: realkevin1995@gmail.com
+서비스: Frog Domino(이하 "게임")
+문의: tosolo.dev@gmail.com
 적용일: 게시 시점부터 적용
 
 1. 수집하는 개인정보 항목
@@ -113,7 +142,7 @@ Google Play / Apple App Store (결제·환불·구매 검증)
 삭제
 처리 정지
 등을 요청할 수 있습니다.
-문의는 이메일을 통해 접수할 수 있습니다: realkevin1995@gmail.com
+문의는 이메일을 통해 접수할 수 있습니다: tosolo.dev@gmail.com
 
 10. 서비스 중단 및 종료 시 처리
 서비스 종료 시 계정 정보 및 분석 데이터는 서비스 목적 달성 후 파기합니다.
