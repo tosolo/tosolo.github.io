@@ -6,13 +6,17 @@
   <title>tosolo — games</title>
   <style>
     :root {
-      --bg: #232323;
-      --surface: #363636;
-      --surface-hover: #404040;
-      --border: #4a4a4a;
-      --text: #e0e0e0;
-      --text-dim: #999;
-      --accent: #f5c518;
+      --bg: #666666;
+      --card: #e3e3e3;
+      --card-text: #111;
+      --card-text-dim: #444;
+      --line: #bdbdbd;
+      --text: #f5f5f5;
+      --text-dim: #d8d8d8;
+      --button: #111;
+      --button-hover: #1f1f1f;
+      --button-text: #fff;
+      --card-height: 120px;
     }
 
     * {
@@ -38,81 +42,113 @@
       max-width: 720px;
     }
 
-    .logo {
-      text-align: center;
-      margin-bottom: 12px;
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 16px;
     }
 
-    .logo img {
-      max-width: 240px;
-      height: auto;
+    .logo-img {
+      width: 128px;
+      height: 128px;
+      object-fit: contain;
     }
 
-    .sub {
-      text-align: center;
+    .brand-stack {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .brand-title {
+      font-size: 56px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      line-height: 1;
+    }
+
+    .brand-sub {
       color: var(--text-dim);
-      margin-bottom: 48px;
       font-size: 15px;
+      margin-top: 2px;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--line);
+      margin: 16px 0 28px;
     }
 
     .projects .item {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px;
+      border: none;
+      border-radius: 0 999px 999px 0;
+      padding: 0 22px 0 0;
       margin-bottom: 16px;
       display: flex;
-      align-items: stretch;
-      gap: 20px;
-      background: var(--surface);
-      transition: border-color 0.2s;
-    }
-
-    .projects .item:hover {
-      border-color: #666;
+      align-items: center;
+      gap: 18px;
+      background: var(--card);
+      height: var(--card-height);
+      overflow: hidden;
     }
 
     .item-title {
-      font-weight: 600;
-      font-size: 18px;
-      letter-spacing: 0.5px;
+      font-weight: 900;
+      font-size: 22px;
+      letter-spacing: 0.6px;
+      color: var(--card-text);
+      text-transform: uppercase;
     }
 
     .tags {
-      color: var(--text-dim);
-      font-size: 13px;
+      color: var(--card-text-dim);
+      font-size: 12px;
       margin-left: 8px;
-      font-weight: 400;
-    }
-
-    .tagline {
-      color: var(--text-dim);
-      font-size: 14px;
+      font-weight: 600;
     }
 
     .cmd-links a {
-      color: var(--text);
+      color: var(--button-text);
       text-decoration: none;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       margin-right: 8px;
-      padding: 6px 18px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      font-size: 14px;
+      padding: 6px 14px;
+      background: var(--button);
+      border: 1px solid var(--button);
+      border-radius: 8px;
+      font-size: 13px;
       transition: background 0.2s, border-color 0.2s;
     }
 
+    .cmd-links {
+      margin-top: 10px;
+    }
+
     .cmd-links a:hover {
-      background: var(--surface-hover);
-      border-color: #666;
+      background: var(--button-hover);
+      border-color: var(--button-hover);
+    }
+
+    .cmd-links img {
+      width: 18px;
+      height: 18px;
+      display: block;
+    }
+
+    .label-short {
+      display: none;
     }
 
     .icon-box {
-      width: 100px;
-      height: 100px;
-      border-radius: 16px;
+      width: var(--card-height);
+      height: var(--card-height);
+      border-radius: 0;
       overflow: hidden;
       flex-shrink: 0;
-      background: var(--bg);
+      background: #2f2f2f;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -125,8 +161,8 @@
     }
 
     .icon-box.placeholder {
-      border: 1px dashed var(--border);
-      color: var(--text-dim);
+      border: 1px dashed #7a7a7a;
+      color: #666;
       font-size: 12px;
       text-align: center;
       line-height: 1.4;
@@ -137,11 +173,13 @@
       min-width: 0;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: center;
+      gap: 6px;
+      color: var(--card-text);
     }
 
     footer {
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--line);
       margin-top: 32px;
       padding-top: 16px;
       font-size: 13px;
@@ -168,25 +206,31 @@
         padding: 24px 16px;
       }
 
-      .logo img {
-        max-width: 180px;
+      .header {
+        align-items: center;
+        gap: 12px;
       }
 
-      .sub {
-        margin-bottom: 32px;
+      .logo-img {
+        width: var(--card-height);
+        height: var(--card-height);
+      }
+
+      .brand-title {
+        font-size: 40px;
       }
 
       .projects .item {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        padding: 20px;
+        padding: 0 16px 0 0;
         gap: 14px;
+        height: var(--card-height);
+        border-radius: 0 999px 999px 0;
       }
 
       .icon-box {
-        width: 88px;
-        height: 88px;
+        width: 96px;
+        height: 96px;
+        border-radius: 0;
       }
 
       .game-info {
@@ -195,11 +239,19 @@
 
       .cmd-links {
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
       }
 
       .cmd-links a {
-        margin-right: 0;
+        margin-right: 8px;
+      }
+
+      .label-long {
+        display: none;
+      }
+
+      .label-short {
+        display: inline;
       }
 
       footer {
@@ -215,11 +267,15 @@
 <body>
 <div class="wrap">
 
-<div class="logo">
-  <img src="logo 512.png" alt="tosolo">
+<div class="header">
+  <img class="logo-img" src="logo_renewal.png" alt="tosolo">
+  <div class="brand-stack">
+    <div class="brand-title">TOSOLO</div>
+    <div class="brand-sub">Let's make something new!</div>
+  </div>
 </div>
 
-<div class="sub">To become the beacon of mobile games.</div>
+<div class="divider"></div>
 
 <div class="projects">
 
@@ -231,16 +287,21 @@
 
     <div class="game-info">
       <div>
-        <span class="item-title">Frog Domino</span>
-        <span class="tags">#puzzle #direction #chain_reaction</span>
-      </div>
-
-      <div class="tagline">
-        Chain Reaction Puzzle! Make the frogs jump into the water in one go!
+        <div class="item-title">FROG DOMINO</div>
+        <div class="tags">#Puzzle #Direction #Chain_Reaction</div>
       </div>
 
       <div class="cmd-links">
-        <a href="https://play.google.com/store/apps/details?id=com.tosolo.frogdomino" target="_blank" rel="noopener">Google Play</a>
+        <a href="https://play.google.com/store/apps/details?id=com.tosolo.frogdomino" target="_blank" rel="noopener">
+          <img src="google logo.png" alt="Google Play">
+          <span class="label-long">Google Play</span>
+          <span class="label-short">Google</span>
+        </a>
+        <a href="https://apps.apple.com/us/app/frog-domino/id6760164161" target="_blank" rel="noopener">
+          <img src="apple logo.png" alt="App Store">
+          <span class="label-long">App Store</span>
+          <span class="label-short">Apple</span>
+        </a>
       </div>
     </div>
   </div>
@@ -253,8 +314,8 @@
 
     <div class="game-info">
       <div>
-        <span class="item-title">Next Project</span>
-        <span class="tags">#tba</span>
+        <div class="item-title">Next Project</div>
+        <div class="tags">#tba</div>
       </div>
     </div>
   </div>
