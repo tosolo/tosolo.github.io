@@ -6,7 +6,7 @@
   <title>tosolo — games</title>
   <style>
     :root {
-      --bg: #666666;
+      --bg: #232323;
       --card: #e3e3e3;
       --card-text: #111;
       --card-text-dim: #444;
@@ -44,28 +44,18 @@
 
     .header {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 18px;
+      gap: 8px;
       margin-bottom: 16px;
+      justify-content: center;
+      text-align: center;
     }
 
     .logo-img {
-      width: 128px;
+      width: 256px;
       height: 128px;
       object-fit: contain;
-    }
-
-    .brand-stack {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .brand-title {
-      font-size: 56px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      line-height: 1;
     }
 
     .brand-sub {
@@ -95,16 +85,25 @@
 
     .item-title {
       font-weight: 900;
-      font-size: 22px;
+      font-size: 19px;
       letter-spacing: 0.6px;
       color: var(--card-text);
       text-transform: uppercase;
+      font-family: "Arial Black", "Impact", "Haettenschweiler", "Franklin Gothic Heavy", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .item-title.frog {
+      color: #1e7145;
+    }
+
+    .item-title.next {
+      color: #232323;
     }
 
     .tags {
       color: var(--card-text-dim);
       font-size: 12px;
-      margin-left: 8px;
+      margin-left: 0;
       font-weight: 600;
     }
 
@@ -114,7 +113,6 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      margin-right: 8px;
       padding: 6px 14px;
       background: var(--button);
       border: 1px solid var(--button);
@@ -124,7 +122,10 @@
     }
 
     .cmd-links {
-      margin-top: 10px;
+      margin-top: 0;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
     .cmd-links a:hover {
@@ -171,10 +172,9 @@
     .game-info {
       flex: 1;
       min-width: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 6px;
+      display: grid;
+      align-content: center;
+      row-gap: 8px;
       color: var(--card-text);
     }
 
@@ -209,15 +209,12 @@
       .header {
         align-items: center;
         gap: 12px;
+        justify-content: center;
       }
 
       .logo-img {
-        width: var(--card-height);
-        height: var(--card-height);
-      }
-
-      .brand-title {
-        font-size: 40px;
+        width: 240px;
+        height: 120px;
       }
 
       .projects .item {
@@ -269,10 +266,7 @@
 
 <div class="header">
   <img class="logo-img" src="logo_renewal.png" alt="tosolo">
-  <div class="brand-stack">
-    <div class="brand-title">TOSOLO</div>
-    <div class="brand-sub">Let's make something new!</div>
-  </div>
+  <div class="brand-sub">Let's play a new game!</div>
 </div>
 
 <div class="divider"></div>
@@ -287,7 +281,7 @@
 
     <div class="game-info">
       <div>
-        <div class="item-title">FROG DOMINO</div>
+        <div class="item-title frog">FROG DOMINO</div>
         <div class="tags">#Puzzle #Direction #Chain_Reaction</div>
       </div>
 
@@ -314,7 +308,7 @@
 
     <div class="game-info">
       <div>
-        <div class="item-title">Next Project</div>
+        <div class="item-title next">Next Project</div>
         <div class="tags">#tba</div>
       </div>
     </div>
