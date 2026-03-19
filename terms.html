@@ -3,71 +3,287 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>tosolo — terms</title>
+  <title>tosolo — games</title>
   <style>
     :root {
       --bg: #191919;
-      --surface: #363636;
-      --border: #4a4a4a;
-      --text: #e0e0e0;
-      --text-dim: #999;
+      --card: #e3e3e3;
+      --card-text: #111;
+      --card-text-dim: #444;
+      --line: #bdbdbd;
+      --text: #f5f5f5;
+      --text-dim: #d8d8d8;
+      --button: #111;
+      --button-hover: #1f1f1f;
+      --button-text: #fff;
+      --card-height: 120px;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 15px;
-      line-height: 1.7;
+      font-family: "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", "Noto Sans CJK KR", "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
       padding: 40px 20px;
     }
 
     .wrap {
+      width: 100%;
       max-width: 720px;
-      margin: 0 auto;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 32px;
     }
 
-    .nav-top {
-      font-size: 13px;
-      margin-bottom: 24px;
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .logo-img {
+      width: 256px;
+      height: 128px;
+      object-fit: contain;
+    }
+
+    .brand-sub {
       color: var(--text-dim);
+      font-size: 15px;
+      margin-top: 2px;
     }
 
-    .nav-top a {
+    .divider {
+      height: 1px;
+      background: var(--line);
+      margin: 16px 0 28px;
+    }
+
+    .projects .item {
+      border: none;
+      border-radius: 0 999px 999px 0;
+      padding: 0 22px 0 0;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      background: var(--card);
+      height: var(--card-height);
+      overflow: hidden;
+    }
+
+    .item-title {
+      font-weight: 900;
+      font-synthesis: weight;
+      font-size: 19px;
+      letter-spacing: -0.02em;
+      color: var(--card-text);
+      text-transform: uppercase;
+      font-family: "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", "Noto Sans CJK KR", "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      text-shadow: 0 0 0.01px currentColor;
+    }
+
+    .item-title.frog {
+      color: #1e7145;
+    }
+
+    .item-title.next {
+      color: #232323;
+    }
+
+    .tags {
+      color: var(--card-text-dim);
+      font-size: 12px;
+      margin-left: 0;
+      font-weight: 600;
+    }
+
+    .cmd-links a {
+      color: var(--button-text);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: var(--button);
+      border: 1px solid var(--button);
+      border-radius: 8px;
+      font-size: 13px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .cmd-links {
+      margin-top: 0;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .cmd-links a:hover {
+      background: var(--button-hover);
+      border-color: var(--button-hover);
+    }
+
+    .cmd-links img {
+      width: 18px;
+      height: 18px;
+      display: block;
+    }
+
+    .label-short {
+      display: none;
+    }
+
+    .icon-box {
+      width: var(--card-height);
+      height: var(--card-height);
+      border-radius: 0;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #2f2f2f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .icon-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .icon-box.placeholder {
+      border: 1px dashed #7a7a7a;
+      color: #666;
+      font-size: 12px;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    .game-info {
+      flex: 1;
+      min-width: 0;
+      display: grid;
+      align-content: center;
+      row-gap: 8px;
+      color: var(--card-text);
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      margin-top: 32px;
+      padding-top: 16px;
+      font-size: 13px;
+      color: var(--text-dim);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer a {
       color: var(--text-dim);
       text-decoration: none;
       margin-right: 16px;
       transition: color 0.2s;
     }
 
-    .nav-top a:hover { color: var(--text); }
-
-    .title {
-      font-weight: 600;
-      font-size: 22px;
-      margin-bottom: 24px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
+    footer a:hover {
+      color: var(--text);
     }
 
-    .text-block {
-      white-space: pre-wrap;
-      font-size: 14px;
-      line-height: 1.7;
+    .footer-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+    }
+
+    .social-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .social-links a {
+      margin-right: 0;
+    }
+
+    .social-links .sep {
       color: var(--text-dim);
     }
 
+    /* Responsive */
     @media (max-width: 600px) {
-      body { padding: 16px; }
-      .wrap { padding: 20px; border-radius: 8px; }
-      .title { font-size: 18px; }
-      .text-block { font-size: 13px; }
+      body {
+        padding: 24px 16px;
+      }
+
+      .header {
+        align-items: center;
+        gap: 12px;
+        justify-content: center;
+      }
+
+      .logo-img {
+        width: 240px;
+        height: 120px;
+      }
+
+      .projects .item {
+        padding: 0 16px 0 0;
+        gap: 14px;
+        height: var(--card-height);
+        border-radius: 0 999px 999px 0;
+      }
+
+      .icon-box {
+        width: 96px;
+        height: 96px;
+        border-radius: 0;
+      }
+
+      .game-info {
+        width: 100%;
+      }
+
+      .cmd-links {
+        display: flex;
+        justify-content: flex-start;
+      }
+
+      .cmd-links a {
+        margin-right: 8px;
+      }
+
+      .label-long {
+        display: none;
+      }
+
+      .label-short {
+        display: inline;
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        text-align: center;
+      }
+
+      .footer-right {
+        align-items: center;
+      }
     }
   </style>
 </head>
@@ -75,81 +291,76 @@
 <body>
 <div class="wrap">
 
-  <div class="nav-top">
-    <a href="https://tosolo.github.io">Home</a>
-    <a href="terms.html">English</a>
-    <a href="terms-kr.html">한국어</a>
+<div class="header">
+  <img class="logo-img" src="logo_renewal.png" alt="tosolo">
+  <div class="brand-sub">모바일 갓겜을 만들자!<br>초보 인디 개발자 토소로입니다.</div>
+</div>
+
+<div class="divider"></div>
+
+<div class="projects">
+
+  <!-- Frog Domino -->
+  <div class="item">
+    <div class="icon-box">
+      <img src="frog_domino_icon.png" alt="Frog Domino icon">
+    </div>
+
+    <div class="game-info">
+      <div>
+        <div class="item-title frog">개구리 도미노 (2026.03 출시)</div>
+        <div class="tags">#퍼즐 #방향설정 #연쇄반응</div>
+      </div>
+
+      <div class="cmd-links">
+        <a href="https://play.google.com/store/apps/details?id=com.tosolo.frogdomino" target="_blank" rel="noopener">
+          <img src="google logo.png" alt="Google Play">
+          <span class="label-long">Google Play</span>
+          <span class="label-short">Google</span>
+        </a>
+        <a href="https://apps.apple.com/us/app/frog-domino/id6760164161" target="_blank" rel="noopener">
+          <img src="apple logo.png" alt="App Store">
+          <span class="label-long">App Store</span>
+          <span class="label-short">Apple</span>
+        </a>
+      </div>
+    </div>
   </div>
 
-  <div class="title">Terms of Service</div>
+  <!-- Next Project -->
+  <div class="item">
+    <div class="icon-box placeholder">
+      coming<br>soon
+    </div>
 
-  <div class="text-block">
-Provider: Tosolo ("Developer")
-Service: ("Game") Frog Domino
-Contact: tosolo.dev@gmail.com
-Governing Law: Republic of Korea
-Effective Date: Upon publication
-
-1. Acceptance of Terms
-By downloading, installing, or using the Game, you acknowledge and agree to be bound by these Terms.
-If you do not agree, please discontinue use.
-
-2. Service Provision and Changes
-(1) The Developer may modify, suspend, or discontinue parts of the Game (including items, features, and ads) at its discretion.
-(2) In the event of service termination, the Developer will provide reasonable notice through in-Game announcements, store listings, or update notes.
-
-3. Age Rating
-The Game is intended for general audiences; however, age ratings may vary by region or platform policies.
-
-4. Accounts and Login
-(1) The Game may rely on platform accounts or social login for identification.
-(2) Users are responsible for managing their own accounts and login credentials.
-
-5. Paid Item: Remove Ads (Permanent)
-(1) "Remove Ads" is a permanent digital item that takes effect immediately upon purchase and removes advertisements within the Game.
-(2) The purchase of Remove Ads does not guarantee the continued availability of the Game or of any account.
-(3) In the event of Game discontinuation, deletion, or removal from stores, no refunds or compensation shall be provided for Remove Ads or any other purchased digital items.
-
-6. Payments and Refunds
-(1) All payment, cancellation, and refund processes are governed by the respective policies of Google Play and Apple App Store (collectively, "Stores").
-(2) The Developer does not provide direct refunds beyond Store policies.
-(3) Local consumer protection laws may apply where applicable.
-
-7. Advertisements
-(1) The Game may display banner ads, full-screen ads, or video ads as part of free access.
-(2) Ad frequency and formats may change during updates.
-(3) If Remove Ads is purchased, in-Game ads will be removed.
-
-8. Prohibited Conduct
-Users shall not:
-(1) Reverse engineer, modify, exploit, or interfere with the Game;
-(2) Use cheats, automation tools, or tamper with data;
-(3) Violate third-party rights or engage in illegal acts.
-
-9. Intellectual Property
-All content within the Game (code, graphics, audio, and other materials) is owned by the Developer or its licensors and may not be reproduced, distributed, or reverse-engineered without permission.
-
-10. Service Termination
-(1) The Developer may terminate the Game at its discretion for operational or other reasons.
-(2) Termination will be announced through reasonable means.
-(3) No refunds or damages will be provided as a result of service termination, except where required by applicable law.
-
-11. Warranty Disclaimer
-The Game is provided on an "as-is" and "as-available" basis without any warranties of any kind.
-The Developer disclaims liability for interruptions, errors, or data loss except in cases of willful misconduct or gross negligence.
-
-12. Privacy and Data
-Personal data processing is governed by a separate Privacy Policy, which forms part of these Terms.
-
-13. Amendments
-(1) The Developer may amend these Terms from time to time.
-(2) Continued use after amendments constitutes acceptance of the revised Terms.
-
-14. Governing Law and Dispute Resolution
-These Terms shall be governed by the laws of the Republic of Korea.
-Local laws in certain jurisdictions may grant additional consumer rights.
+    <div class="game-info">
+      <div>
+        <div class="item-title next">Project BM</div>
+        <div class="tags">#tba</div>
+      </div>
+    </div>
   </div>
 
 </div>
+
+<footer>
+  <div>
+    <a href="terms.html">Terms</a>
+    <a href="privacy.html">Privacy</a>
+  </div>
+    <div class="footer-right">
+      <div>&copy; <span id="year"></span> tosolo</div>
+      <div class="social-links">
+        <a href="https://blog.naver.com/creatorayla" target="_blank" rel="noopener">Blog</a>
+        <span class="sep">|</span>
+        <a href="https://x.com/tosolo_dev" target="_blank" rel="noopener">X</a>
+      </div>
+  </div>
+</footer>
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
