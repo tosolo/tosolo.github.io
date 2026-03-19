@@ -6,7 +6,7 @@
   <title>tosolo — games</title>
   <style>
     :root {
-      --bg: #232323;
+      --bg: #191919;
       --card: #e3e3e3;
       --card-text: #111;
       --card-text-dim: #444;
@@ -28,7 +28,7 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", "Noto Sans CJK KR", "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       font-size: 16px;
       line-height: 1.6;
       min-height: 100vh;
@@ -85,11 +85,13 @@
 
     .item-title {
       font-weight: 900;
+      font-synthesis: weight;
       font-size: 19px;
-      letter-spacing: 0.6px;
+      letter-spacing: -0.02em;
       color: var(--card-text);
       text-transform: uppercase;
-      font-family: "Arial Black", "Impact", "Haettenschweiler", "Franklin Gothic Heavy", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", "Noto Sans CJK KR", "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      text-shadow: 0 0 0.01px currentColor;
     }
 
     .item-title.frog {
@@ -200,6 +202,27 @@
       color: var(--text);
     }
 
+    .footer-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+    }
+
+    .social-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .social-links a {
+      margin-right: 0;
+    }
+
+    .social-links .sep {
+      color: var(--text-dim);
+    }
+
     /* Responsive */
     @media (max-width: 600px) {
       body {
@@ -257,6 +280,10 @@
         gap: 8px;
         text-align: center;
       }
+
+      .footer-right {
+        align-items: center;
+      }
     }
   </style>
 </head>
@@ -266,7 +293,7 @@
 
 <div class="header">
   <img class="logo-img" src="logo_renewal.png" alt="tosolo">
-  <div class="brand-sub">Let's play a new game!</div>
+  <div class="brand-sub">모바일 갓겜을 만들자!<br>초보 인디 개발자 토소로입니다.</div>
 </div>
 
 <div class="divider"></div>
@@ -281,8 +308,8 @@
 
     <div class="game-info">
       <div>
-        <div class="item-title frog">FROG DOMINO | 개구리 도미노</div>
-        <div class="tags">#Puzzle #Direction #Chain_Reaction</div>
+        <div class="item-title frog">개구리 도미노 (2026.03 출시)</div>
+        <div class="tags">#퍼즐 #방향설정 #연쇄반응</div>
       </div>
 
       <div class="cmd-links">
@@ -308,7 +335,7 @@
 
     <div class="game-info">
       <div>
-        <div class="item-title next">Next Project</div>
+        <div class="item-title next">Project BM</div>
         <div class="tags">#tba</div>
       </div>
     </div>
@@ -321,7 +348,14 @@
     <a href="terms.html">Terms</a>
     <a href="privacy.html">Privacy</a>
   </div>
-  <div>&copy; <span id="year"></span> tosolo</div>
+    <div class="footer-right">
+      <div>&copy; <span id="year"></span> tosolo</div>
+      <div class="social-links">
+        <a href="https://blog.naver.com/creatorayla" target="_blank" rel="noopener">Blog</a>
+        <span class="sep">|</span>
+        <a href="https://x.com/tosolo_dev" target="_blank" rel="noopener">X</a>
+      </div>
+  </div>
 </footer>
 </div>
 
