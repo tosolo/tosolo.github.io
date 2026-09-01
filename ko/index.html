@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="토솔로는 게임과 실용적인 앱을 만드는 인디 개발 스튜디오입니다.">
+  <meta name="theme-color" content="#b9a7ff">
+  <link rel="canonical" href="https://tosolo.net/ko/">
+  <link rel="alternate" hreflang="en" href="https://tosolo.net/">
+  <link rel="alternate" hreflang="ko" href="https://tosolo.net/ko/">
+  <link rel="alternate" hreflang="x-default" href="https://tosolo.net/">
+  <link rel="icon" href="https://tosolo.net/favicon.ico" type="image/x-icon">
+  <title>tosolo - 인디 개발 스튜디오</title>
+  <style>
+    :root {
+      --page: #eee9ff;
+      --page-deep: #e4dcff;
+      --lavender: #b9a7ff;
+      --lavender-deep: #715bc7;
+      --ink: #191622;
+      --ink-soft: #5f5870;
+      --surface: rgba(255, 255, 255, 0.78);
+      --line: rgba(45, 34, 80, 0.14);
+      --button: #201a2f;
+      --button-hover: #7059ca;
+      --white: #fff;
+      --frog: #23784f;
+      --shadow: 0 24px 70px rgba(66, 45, 130, 0.15);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: var(--page); scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 0%, rgba(255,255,255,.92), transparent 34rem),
+        linear-gradient(180deg, var(--page) 0%, #f7f4ff 70%, var(--page-deep) 100%);
+      font: 16px/1.55 Inter, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    a { color: inherit; }
+    .wrap { width: 100%; }
+
+    .hero {
+      position: relative;
+      min-height: 410px;
+      overflow: hidden;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 82% 16%, rgba(255,255,255,.36), transparent 26%),
+        radial-gradient(circle at 18% 86%, rgba(77,54,157,.38), transparent 38%),
+        linear-gradient(135deg, #cbbfff 0%, #aa95f3 48%, #8971dc 100%);
+      isolation: isolate;
+    }
+    .hero::before, .hero::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      border: 1px solid rgba(255,255,255,.34);
+      border-radius: 999px;
+      transform: rotate(-18deg);
+    }
+    .hero::before { width: 420px; height: 160px; right: -90px; top: 56px; }
+    .hero::after { width: 330px; height: 110px; left: -120px; bottom: 40px; }
+    .language-switch {
+      position: absolute;
+      z-index: 1;
+      top: 24px;
+      right: 28px;
+      padding: 7px 12px;
+      border: 1px solid rgba(255,255,255,.38);
+      border-radius: 999px;
+      color: var(--white);
+      background: rgba(34,25,67,.18);
+      font-size: 12px;
+      font-weight: 750;
+      text-decoration: none;
+      backdrop-filter: blur(10px);
+    }
+    .language-switch:hover, .language-switch:focus-visible { background: rgba(34,25,67,.34); }
+
+    .hero-inner {
+      width: min(1080px, calc(100% - 56px));
+      min-height: 410px;
+      margin: 0 auto;
+      padding: 64px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      text-align: center;
+    }
+    .brand-block { width: min(760px, 100%); }
+    .logo-img {
+      display: block;
+      width: min(330px, 76vw);
+      margin: 0 auto;
+      height: auto;
+      max-height: 164px;
+      object-fit: contain;
+      object-position: center;
+      filter: drop-shadow(0 10px 24px rgba(55,38,117,.2));
+    }
+    .hero-slogan {
+      margin-top: 26px;
+      font-size: clamp(27px, 4vw, 50px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -.05em;
+      text-wrap: balance;
+    }
+    .brand-sub {
+      max-width: 680px;
+      margin: 18px auto 0;
+      font-size: clamp(16px, 2vw, 21px);
+      font-weight: 560;
+      line-height: 1.5;
+      letter-spacing: -.015em;
+      text-wrap: balance;
+    }
+
+    .projects-section, .about-card, footer { width: min(920px, calc(100% - 56px)); margin-inline: auto; }
+    .projects-section { padding: 74px 0 0; }
+    .work-section + .work-section { margin-top: 88px; }
+    .section-heading {
+      margin-bottom: 30px;
+    }
+    .section-title {
+      font-size: clamp(22px, 3.2vw, 40px);
+      line-height: 1.05;
+      letter-spacing: -.05em;
+    }
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 210px));
+      gap: 22px;
+      justify-content: start;
+    }
+    .item {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(255,255,255,.86);
+      border-radius: 28px;
+      background: var(--surface);
+      box-shadow: 0 16px 42px rgba(69,50,122,.09);
+      backdrop-filter: blur(18px);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+    .card-link { position: absolute; z-index: 2; inset: 0; }
+    .item:hover { transform: translateY(-4px); box-shadow: 0 22px 52px rgba(69,50,122,.15); }
+    .icon-box {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #23202c;
+    }
+    .icon-box img { width: 100%; height: 100%; object-fit: cover; }
+    .icon-box.missing::after {
+      content: attr(data-label);
+      color: rgba(255,255,255,.38);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .14em;
+    }
+    .icon-box.placeholder {
+      color: rgba(45,34,80,.6);
+      background: linear-gradient(135deg,rgba(255,255,255,.4),transparent),var(--lavender);
+      font-size: 13px;
+      font-weight: 750;
+      letter-spacing: .12em;
+      line-height: 1.4;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    .game-info {
+      min-width: 0;
+      padding: 20px 22px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .item-title {
+      color: var(--ink);
+      font-size: 16px;
+      font-weight: 850;
+      letter-spacing: -.035em;
+      line-height: 1.05;
+    }
+    .item-title.frog { color: var(--frog); }
+
+    .about-card {
+      margin-top: 88px;
+      padding: 28px 30px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      border: 1px solid rgba(255,255,255,.86);
+      border-radius: 24px;
+      background: rgba(255,255,255,.72);
+      box-shadow: 0 16px 42px rgba(69,50,122,.08);
+      backdrop-filter: blur(18px);
+    }
+    .about-avatar {
+      width: 96px;
+      height: 96px;
+      flex: 0 0 96px;
+      overflow: hidden;
+      border: 3px solid rgba(255,255,255,.92);
+      border-radius: 50%;
+      box-shadow: 0 8px 24px rgba(69,50,122,.16);
+    }
+    .about-avatar img { width: 100%; height: 100%; display: block; object-fit: cover; }
+    .about-name { font-size: 22px; line-height: 1.1; letter-spacing: -.035em; }
+    .about-role { margin-top: 7px; color: var(--ink-soft); font-size: 14px; }
+    .about-links { margin-top: 13px; display: flex; flex-wrap: wrap; gap: 8px 16px; }
+    .about-links a { color: var(--lavender-deep); font-size: 13px; font-weight: 750; text-decoration: none; }
+    .about-links a:hover, .about-links a:focus-visible { text-decoration: underline; }
+    footer {
+      margin-top: 54px;
+      padding: 22px 2px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--ink-soft);
+      font-size: 13px;
+    }
+    footer a { margin-right: 18px; color: var(--ink-soft); font-weight: 650; text-decoration: none; }
+    footer a:hover, footer a:focus-visible { color: var(--lavender-deep); }
+    .footer-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+    a:focus-visible { outline: 3px solid rgba(113,91,199,.4); outline-offset: 3px; }
+
+    @media (max-width: 760px) {
+      .hero, .hero-inner { min-height: 420px; }
+      .hero-inner, .projects-section, .about-card, footer { width: calc(100% - 28px); }
+      .hero-inner { padding: 54px 0; }
+      .projects-section { padding-top: 54px; }
+      .work-section + .work-section { margin-top: 64px; }
+      .projects {
+        grid-template-columns: repeat(3,minmax(0,1fr));
+        gap: 10px;
+      }
+      .item { border-radius: 16px; }
+      .game-info { display: none; }
+      .about-card { margin-top: 64px; padding: 22px; gap: 18px; }
+      .about-avatar { width: 76px; height: 76px; flex-basis: 76px; }
+      footer { flex-direction: column; align-items: flex-start; }
+      .footer-right { align-items: flex-start; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="hero">
+      <a class="language-switch" href="https://tosolo.net/" lang="en" hreflang="en">English</a>
+      <div class="hero-inner">
+        <div class="brand-block">
+          <img class="logo-img" src="https://tosolo.net/logo_renewal.webp" alt="tosolo">
+          <h1 class="hero-slogan">Fun Games &amp; Useful Apps</h1>
+          <p class="brand-sub">토솔로는 게임과 실용적인 앱을 만드는 인디 개발 스튜디오입니다.</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="projects-section" aria-label="토솔로 제품">
+      <section class="work-section" aria-labelledby="games-title">
+        <div class="section-heading">
+          <h2 class="section-title" id="games-title">게임</h2>
+        </div>
+        <div class="projects">
+          <article class="item">
+          <a class="card-link" href="https://tosolo.net/ko/frog-domino/" aria-label="개구리 도미노 상세 페이지"></a>
+          <div class="icon-box" data-label="개구리 도미노">
+            <img src="https://tosolo.net/icon_frogdomino.webp" alt="개구리 도미노 아이콘" onerror="this.style.display='none';this.parentElement.classList.add('missing')">
+          </div>
+          <div class="game-info">
+            <h3 class="item-title frog">개구리 도미노</h3>
+          </div>
+          </article>
+
+          <article class="item">
+            <div class="icon-box placeholder">출시<br>예정</div>
+            <div class="game-info">
+              <h3 class="item-title">프로젝트 BM</h3>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="work-section" aria-labelledby="utility-title">
+        <div class="section-heading">
+          <h2 class="section-title" id="utility-title">유틸리티 앱</h2>
+        </div>
+        <div class="projects">
+          <article class="item">
+            <div class="icon-box" data-label="지메일용 파일트래커">
+              <img src="https://tosolo.net/icon_filetracker.webp" alt="지메일용 파일트래커 아이콘" onerror="this.style.display='none';this.parentElement.classList.add('missing')">
+            </div>
+            <div class="game-info">
+              <h3 class="item-title">지메일용 파일트래커</h3>
+            </div>
+          </article>
+        </div>
+      </section>
+    </section>
+
+    <!-- Frog Domino detail-page links:
+      Google Play: https://play.google.com/store/apps/details?id=com.tosolo.frogdomino
+      App Store: https://apps.apple.com/us/app/frog-domino/id6760164161
+    -->
+
+    <section class="about-card" aria-label="개발자 소개">
+      <div class="about-avatar">
+        <img src="https://tosolo.net/avatar128.webp" alt="Ron Yoo">
+      </div>
+      <div>
+        <h2 class="about-name">Ron Yoo</h2>
+        <p class="about-role">토솔로 운영 및 개발 담당</p>
+        <div class="about-links">
+          <a href="https://www.linkedin.com/in/ronald5" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="mailto:tosolo.dev@gmail.com">tosolo.dev@gmail.com</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div><a href="https://tosolo.net/terms.html">이용약관</a><a href="https://tosolo.net/privacy.html">개인정보처리방침</a></div>
+      <div class="footer-right"><div>&copy; <span id="year"></span> tosolo</div></div>
+    </footer>
+  </main>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
