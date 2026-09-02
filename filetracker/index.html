@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FileTracker for Gmail is a Chrome extension that brings attachments, inline images, and links from a Gmail thread together in one sidebar.">
+  <meta name="theme-color" content="#eaf8f0">
+  <link rel="canonical" href="https://tosolo.net/filetracker/">
+  <link rel="alternate" hreflang="en" href="https://tosolo.net/filetracker/">
+  <link rel="alternate" hreflang="ko" href="https://tosolo.net/ko/filetracker/">
+  <link rel="alternate" hreflang="x-default" href="https://tosolo.net/filetracker/">
+  <link rel="icon" href="https://tosolo.net/favicon.ico" type="image/x-icon">
+  <title>FileTracker for Gmail - Find Files and Links in Gmail | tosolo</title>
+  <style>
+    :root {
+      --page: #eaf8f0;
+      --page-light: #fbfefc;
+      --page-deep: #d9f2e4;
+      --accent: #39df84;
+      --accent-deep: #167a49;
+      --ink: #191622;
+      --ink-soft: #615a70;
+      --surface: rgba(255,255,255,.72);
+      --line: rgba(45,34,80,.14);
+      --shadow: 0 24px 70px rgba(23,104,63,.11);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: var(--page); scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 0%, rgba(255,255,255,.95), transparent 34rem),
+        radial-gradient(circle at 92% 18%, rgba(57,223,132,.16), transparent 28rem),
+        linear-gradient(180deg, var(--page-light) 0%, var(--page) 62%, var(--page-deep) 100%);
+      font: 16px/1.6 Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    a { color: inherit; }
+    .topbar {
+      border-bottom: 1px solid rgba(45,34,80,.1);
+      background: rgba(255,255,255,.76);
+      backdrop-filter: blur(18px);
+    }
+    .topbar-inner {
+      width: min(920px, calc(100% - 48px));
+      min-height: 78px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .company-logo { display: inline-flex; align-items: center; text-decoration: none; }
+    .company-logo img {
+      width: 116px;
+      height: 46px;
+      display: block;
+      object-fit: contain;
+      object-position: left center;
+      filter: brightness(0) saturate(100%);
+    }
+    .language-state {
+      padding: 7px 11px;
+      border-radius: 999px;
+      color: var(--accent-deep);
+      background: rgba(57,223,132,.16);
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+    main { width: min(920px, calc(100% - 48px)); margin: 0 auto; }
+    .hero { padding: 78px 0 74px; text-align: center; }
+    .product-heading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 25px;
+    }
+    .product-icon {
+      width: 126px;
+      height: 126px;
+      flex: 0 0 126px;
+      border: 4px solid rgba(255,255,255,.9);
+      border-radius: 27px;
+      box-shadow: 0 20px 48px rgba(22,122,73,.19);
+    }
+    .title-block { text-align: left; }
+    h1 {
+      font-size: clamp(40px, 6vw, 68px);
+      line-height: .98;
+      letter-spacing: -.06em;
+    }
+    .tags {
+      margin-top: 11px;
+      color: var(--accent-deep);
+      font-size: 13px;
+      font-weight: 800;
+      word-spacing: 4px;
+    }
+    .tagline {
+      max-width: 720px;
+      margin: 46px auto 0;
+      font-size: clamp(27px, 4.3vw, 42px);
+      font-weight: 900;
+      line-height: 1.16;
+      letter-spacing: -.045em;
+      text-wrap: balance;
+    }
+    .hero-copy {
+      max-width: 700px;
+      margin: 21px auto 0;
+      color: var(--ink-soft);
+      font-size: clamp(16px, 2vw, 19px);
+      line-height: 1.7;
+      text-wrap: balance;
+    }
+    .hero-action { margin-top: 30px; }
+    .coming-soon {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 12px 18px;
+      border: 1px solid rgba(45,34,80,.14);
+      border-radius: 999px;
+      color: var(--ink-soft);
+      background: rgba(255,255,255,.7);
+      box-shadow: 0 10px 30px rgba(23,104,63,.08);
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .coming-soon::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px rgba(57,223,132,.14);
+    }
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .feature-card {
+      min-height: 225px;
+      padding: 27px;
+      border: 1px solid rgba(255,255,255,.88);
+      border-radius: 25px;
+      background: var(--surface);
+      box-shadow: 0 16px 44px rgba(23,104,63,.08);
+      backdrop-filter: blur(18px);
+    }
+    .feature-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      color: #101512;
+      background: var(--accent);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: -.02em;
+    }
+    .feature-card h2 { margin-top: 25px; font-size: 21px; line-height: 1.2; letter-spacing: -.035em; }
+    .feature-card p { margin-top: 11px; color: var(--ink-soft); font-size: 14px; line-height: 1.7; }
+    .content-section {
+      margin-top: 76px;
+      padding: 42px;
+      border: 1px solid rgba(255,255,255,.88);
+      border-radius: 28px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+    .section-label { color: var(--accent-deep); font-size: 11px; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; }
+    .content-section h2 { margin-top: 10px; font-size: clamp(25px, 3.5vw, 35px); line-height: 1.14; letter-spacing: -.045em; }
+    .content-section > p { max-width: 720px; margin-top: 17px; color: var(--ink-soft); line-height: 1.75; }
+    .trust-points, .access-points {
+      margin-top: 25px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 11px 24px;
+      list-style: none;
+    }
+    .trust-points li, .access-points li { position: relative; padding-left: 21px; color: var(--ink-soft); font-size: 14px; }
+    .trust-points li::before, .access-points li::before {
+      content: "";
+      position: absolute;
+      top: .7em;
+      left: 0;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .legal-links { margin-top: 25px; display: flex; flex-wrap: wrap; gap: 10px 18px; }
+    .legal-links a { color: var(--accent-deep); font-size: 13px; font-weight: 800; text-underline-offset: 3px; }
+    .pricing-note {
+      margin-top: 76px;
+      padding: 34px 38px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 34px;
+      border: 1px solid rgba(22,122,73,.18);
+      border-radius: 25px;
+      background: linear-gradient(135deg, rgba(57,223,132,.16), rgba(255,255,255,.72));
+    }
+    .pricing-note h2 { font-size: 24px; letter-spacing: -.035em; }
+    .pricing-note p { max-width: 610px; margin-top: 8px; color: var(--ink-soft); font-size: 14px; }
+    .trial-badge {
+      flex: 0 0 auto;
+      padding: 15px 17px;
+      border-radius: 17px;
+      color: #102319;
+      background: var(--accent);
+      text-align: center;
+      font-weight: 900;
+      line-height: 1.25;
+      box-shadow: 0 12px 26px rgba(22,122,73,.16);
+    }
+    .trial-badge small { display: block; margin-top: 3px; font-size: 10px; font-weight: 800; }
+    footer {
+      margin-top: 58px;
+      padding: 24px 2px 30px;
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--ink-soft);
+      font-size: 12px;
+      text-align: center;
+    }
+    a:focus-visible { outline: 3px solid rgba(57,223,132,.42); outline-offset: 3px; }
+
+    @media (max-width: 720px) {
+      .topbar-inner, main { width: calc(100% - 30px); }
+      .topbar-inner { min-height: 68px; }
+      .company-logo img { width: 96px; height: 40px; }
+      .hero { padding: 54px 0 56px; }
+      .product-heading { gap: 16px; }
+      .product-icon { width: 90px; height: 90px; flex-basis: 90px; border-radius: 20px; border-width: 3px; }
+      h1 { font-size: clamp(31px, 9.5vw, 50px); }
+      .tags { margin-top: 7px; font-size: 11px; word-spacing: 1px; }
+      .tagline { margin-top: 36px; }
+      .feature-grid { grid-template-columns: 1fr; gap: 12px; }
+      .feature-card { min-height: 0; padding: 23px; }
+      .feature-card h2 { margin-top: 18px; }
+      .content-section { margin-top: 54px; padding: 27px 23px; border-radius: 23px; }
+      .trust-points, .access-points { grid-template-columns: 1fr; }
+      .pricing-note { margin-top: 54px; padding: 27px 23px; align-items: flex-start; flex-direction: column; }
+      footer { flex-direction: column; }
+    }
+    @media (max-width: 390px) { .product-heading { align-items: flex-start; flex-direction: column; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="company-logo" href="https://tosolo.net/" aria-label="tosolo home"><img src="https://tosolo.net/logo_renewal.webp" alt="tosolo"></a>
+      <a class="language-state" href="https://tosolo.net/ko/filetracker/" lang="ko" hreflang="ko">한국어</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="product-title">
+      <div class="product-heading">
+        <img class="product-icon" src="https://tosolo.net/icon_filetracker.webp" alt="FileTracker for Gmail icon">
+        <div class="title-block">
+          <h1 id="product-title">FileTracker<br>for Gmail</h1>
+          <p class="tags">#Chrome #Gmail #Productivity</p>
+        </div>
+      </div>
+      <p class="tagline">Find files and links in Gmail threads,<br>all in one place.</p>
+      <p class="hero-copy">Ever had to open every thread in Gmail just to find a file you missed? With FileTracker, you can view every file and link at a glance.</p>
+      <div class="hero-action"><span class="coming-soon">Coming soon on the Chrome Web Store</span></div>
+    </section>
+
+    <section class="feature-grid" aria-label="Key features">
+      <article class="feature-card"><span class="feature-mark">FILE</span><h2>Browse attachments</h2><p>See attachments from the entire thread in one place, then narrow them down by sender or file type.</p></article>
+      <article class="feature-card"><span class="feature-mark">IMG</span><h2>View inline images</h2><p>Browse images embedded in email messages as thumbnails and quickly find the one you need.</p></article>
+      <article class="feature-card"><span class="feature-mark">LINK</span><h2>Reopen links</h2><p>Collect the links in a thread and jump straight back to the original message where each one appeared.</p></article>
+    </section>
+
+    <section class="content-section" aria-labelledby="workflow-title">
+      <p class="section-label">How it works</p>
+      <h2 id="workflow-title">Focused on the thread you’re viewing.</h2>
+      <p>FileTracker reads only the Gmail thread you currently select. It does not modify or delete email, and uses its access solely to help you find and reopen the materials you need.</p>
+      <ul class="access-points">
+        <li>Uses read-only Gmail access</li>
+        <li>Downloads attachments only when you choose</li>
+        <li>Shows sender and date details for the current thread</li>
+        <li>Takes you directly to the original email</li>
+      </ul>
+    </section>
+
+    <section class="content-section" aria-labelledby="privacy-title">
+      <p class="section-label">Privacy first</p>
+      <h2 id="privacy-title">Your email content is never stored on Tosolo servers.</h2>
+      <p>Your emails, attachments, images, links, and search results are processed only on your device. Our servers store only the minimum account information needed to manage the 31-day free trial and purchased license.</p>
+      <ul class="trust-points">
+        <li>No server storage of email content or attachments</li>
+        <li>No advertising or behavioral analytics</li>
+        <li>No personalized ads or sale of user data</li>
+        <li>Complies with the Chrome Web Store Limited Use requirements</li>
+      </ul>
+      <div class="legal-links">
+        <a href="https://tosolo.net/privacy.html">Privacy Policy</a>
+        <a href="https://tosolo.net/terms.html">Terms and Refund Policy</a>
+        <a href="mailto:tosolo.dev@gmail.com">Support: tosolo.dev@gmail.com</a>
+      </div>
+    </section>
+
+    <section class="pricing-note" aria-labelledby="trial-title">
+      <div>
+        <h2 id="trial-title">Try it free for 31 days.</h2>
+        <p>After the free trial, continue with a one-time lifetime license. There is no subscription or automatic charge. The actual price and tax are shown in your local currency in Paddle Checkout before purchase.</p>
+      </div>
+      <div class="trial-badge">31 DAYS<small>FREE TRIAL</small></div>
+    </section>
+
+    <footer>
+      <p>&copy; 2026 tosolo. Developed and published by tosolo. All rights reserved.</p>
+    </footer>
+  </main>
+</body>
+</html>
