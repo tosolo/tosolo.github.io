@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="지메일용 파일트래커는 긴 Gmail 대화에 흩어진 첨부파일, 이미지와 링크를 한곳에서 찾아보고 다시 열 수 있는 Chrome 확장프로그램입니다.">
+  <meta name="theme-color" content="#eaf8f0">
+  <link rel="canonical" href="https://tosolo.net/ko/filetracker/">
+  <link rel="alternate" hreflang="en" href="https://tosolo.net/filetracker/">
+  <link rel="alternate" hreflang="ko" href="https://tosolo.net/ko/filetracker/">
+  <link rel="alternate" hreflang="x-default" href="https://tosolo.net/filetracker/">
+  <link rel="icon" href="https://tosolo.net/favicon.ico" type="image/x-icon">
+  <title>지메일용 파일트래커 - Gmail 파일·링크 찾기 | tosolo</title>
+  <style>
+    :root {
+      --page: #eaf8f0;
+      --page-light: #fbfefc;
+      --page-deep: #d9f2e4;
+      --accent: #39df84;
+      --accent-deep: #167a49;
+      --ink: #191622;
+      --ink-soft: #615a70;
+      --surface: rgba(255,255,255,.72);
+      --line: rgba(45,34,80,.14);
+      --shadow: 0 24px 70px rgba(23,104,63,.11);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: var(--page); scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 0%, rgba(255,255,255,.95), transparent 34rem),
+        radial-gradient(circle at 92% 18%, rgba(57,223,132,.16), transparent 28rem),
+        linear-gradient(180deg, var(--page-light) 0%, var(--page) 62%, var(--page-deep) 100%);
+      font: 16px/1.6 Inter, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    a { color: inherit; }
+    .topbar {
+      border-bottom: 1px solid rgba(45,34,80,.1);
+      background: rgba(255,255,255,.76);
+      backdrop-filter: blur(18px);
+    }
+    .topbar-inner {
+      width: min(920px, calc(100% - 48px));
+      min-height: 78px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .company-logo { display: inline-flex; align-items: center; text-decoration: none; }
+    .company-logo img {
+      width: 116px;
+      height: 46px;
+      display: block;
+      object-fit: contain;
+      object-position: left center;
+      filter: brightness(0) saturate(100%);
+    }
+    .language-state {
+      padding: 7px 11px;
+      border-radius: 999px;
+      color: var(--accent-deep);
+      background: rgba(57,223,132,.16);
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+    main { width: min(920px, calc(100% - 48px)); margin: 0 auto; }
+    .hero { padding: 78px 0 74px; text-align: center; }
+    .product-heading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 25px;
+    }
+    .product-icon {
+      width: 126px;
+      height: 126px;
+      flex: 0 0 126px;
+      border: 4px solid rgba(255,255,255,.9);
+      border-radius: 27px;
+      box-shadow: 0 20px 48px rgba(22,122,73,.19);
+    }
+    .title-block { text-align: left; }
+    h1 {
+      font-size: clamp(40px, 6vw, 68px);
+      line-height: .98;
+      letter-spacing: -.06em;
+    }
+    .tags {
+      margin-top: 11px;
+      color: var(--accent-deep);
+      font-size: 13px;
+      font-weight: 800;
+      word-spacing: 4px;
+    }
+    .tagline {
+      max-width: 720px;
+      margin: 46px auto 0;
+      font-size: clamp(27px, 4.3vw, 42px);
+      font-weight: 900;
+      line-height: 1.16;
+      letter-spacing: -.045em;
+      text-wrap: balance;
+    }
+    .hero-copy {
+      max-width: 700px;
+      margin: 21px auto 0;
+      color: var(--ink-soft);
+      font-size: clamp(16px, 2vw, 19px);
+      line-height: 1.7;
+      text-wrap: balance;
+    }
+    .hero-action { margin-top: 30px; }
+    .coming-soon {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 12px 18px;
+      border: 1px solid rgba(45,34,80,.14);
+      border-radius: 999px;
+      color: var(--ink-soft);
+      background: rgba(255,255,255,.7);
+      box-shadow: 0 10px 30px rgba(23,104,63,.08);
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .coming-soon::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px rgba(57,223,132,.14);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .feature-card {
+      min-height: 225px;
+      padding: 27px;
+      border: 1px solid rgba(255,255,255,.88);
+      border-radius: 25px;
+      background: var(--surface);
+      box-shadow: 0 16px 44px rgba(23,104,63,.08);
+      backdrop-filter: blur(18px);
+    }
+    .feature-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      color: #101512;
+      background: var(--accent);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: -.02em;
+    }
+    .feature-card h2 {
+      margin-top: 25px;
+      font-size: 21px;
+      line-height: 1.2;
+      letter-spacing: -.035em;
+    }
+    .feature-card p {
+      margin-top: 11px;
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .content-section {
+      margin-top: 76px;
+      padding: 42px;
+      border: 1px solid rgba(255,255,255,.88);
+      border-radius: 28px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+    .section-label {
+      color: var(--accent-deep);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    .content-section h2 {
+      margin-top: 10px;
+      font-size: clamp(25px, 3.5vw, 35px);
+      line-height: 1.14;
+      letter-spacing: -.045em;
+    }
+    .content-section > p {
+      max-width: 720px;
+      margin-top: 17px;
+      color: var(--ink-soft);
+      line-height: 1.75;
+    }
+    .trust-points, .access-points {
+      margin-top: 25px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 11px 24px;
+      list-style: none;
+    }
+    .trust-points li, .access-points li {
+      position: relative;
+      padding-left: 21px;
+      color: var(--ink-soft);
+      font-size: 14px;
+    }
+    .trust-points li::before, .access-points li::before {
+      content: "";
+      position: absolute;
+      top: .7em;
+      left: 0;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .legal-links {
+      margin-top: 25px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+    }
+    .legal-links a {
+      color: var(--accent-deep);
+      font-size: 13px;
+      font-weight: 800;
+      text-underline-offset: 3px;
+    }
+    .pricing-note {
+      margin-top: 76px;
+      padding: 34px 38px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 34px;
+      border: 1px solid rgba(22,122,73,.18);
+      border-radius: 25px;
+      background: linear-gradient(135deg, rgba(57,223,132,.16), rgba(255,255,255,.72));
+    }
+    .pricing-note h2 { font-size: 24px; letter-spacing: -.035em; }
+    .pricing-note p { max-width: 610px; margin-top: 8px; color: var(--ink-soft); font-size: 14px; }
+    .trial-badge {
+      flex: 0 0 auto;
+      padding: 15px 17px;
+      border-radius: 17px;
+      color: #102319;
+      background: var(--accent);
+      text-align: center;
+      font-weight: 900;
+      line-height: 1.25;
+      box-shadow: 0 12px 26px rgba(22,122,73,.16);
+    }
+    .trial-badge small { display: block; margin-top: 3px; font-size: 10px; font-weight: 800; }
+    footer {
+      margin-top: 58px;
+      padding: 24px 2px 30px;
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--ink-soft);
+      font-size: 12px;
+      text-align: center;
+    }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 16px; }
+    footer a { color: var(--accent-deep); font-weight: 750; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    a:focus-visible { outline: 3px solid rgba(57,223,132,.42); outline-offset: 3px; }
+
+    @media (max-width: 720px) {
+      .topbar-inner, main { width: calc(100% - 30px); }
+      .topbar-inner { min-height: 68px; }
+      .company-logo img { width: 96px; height: 40px; }
+      .hero { padding: 54px 0 56px; }
+      .product-heading { gap: 16px; }
+      .product-icon { width: 90px; height: 90px; flex-basis: 90px; border-radius: 20px; border-width: 3px; }
+      h1 { font-size: clamp(31px, 9.5vw, 50px); }
+      .tags { margin-top: 7px; font-size: 11px; word-spacing: 1px; }
+      .tagline { margin-top: 36px; }
+      .feature-grid { grid-template-columns: 1fr; gap: 12px; }
+      .feature-card { min-height: 0; padding: 23px; }
+      .feature-card h2 { margin-top: 18px; }
+      .content-section { margin-top: 54px; padding: 27px 23px; border-radius: 23px; }
+      .trust-points, .access-points { grid-template-columns: 1fr; }
+      .pricing-note { margin-top: 54px; padding: 27px 23px; align-items: flex-start; flex-direction: column; }
+      footer { flex-direction: column; }
+    }
+    @media (max-width: 390px) {
+      .product-heading { align-items: flex-start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="company-logo" href="https://tosolo.net/ko/" aria-label="토솔로 홈"><img src="https://tosolo.net/logo_renewal.webp" alt="tosolo"></a>
+      <a class="language-state" href="https://tosolo.net/filetracker/" lang="en" hreflang="en">English</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="product-title">
+      <div class="product-heading">
+        <img class="product-icon" src="https://tosolo.net/icon_filetracker.webp" alt="지메일용 파일트래커 아이콘">
+        <div class="title-block">
+          <h1 id="product-title">지메일용<br>파일트래커</h1>
+          <p class="tags">#Chrome #Gmail #생산성</p>
+        </div>
+      </div>
+      <p class="tagline">Gmail 쓰레드에 묻힌 파일과 링크를<br>한곳에서 다시 찾으세요.</p>
+      <p class="hero-copy">Gmail에서 놓친 파일을 찾느라 쓰레드를 하나씩 펼쳐본 적 있으신가요? 이제 파일트래커 사이드바 하나로 모든 파일과 링크를 한눈에 조회할 수 있습니다.</p>
+      <div class="hero-action"><span class="coming-soon">Chrome 웹스토어 출시 준비 중</span></div>
+    </section>
+
+    <section class="feature-grid" aria-label="주요 기능">
+      <article class="feature-card"><span class="feature-mark">FILE</span><h2>첨부파일 모아보기</h2><p>대화 전체에 흩어진 첨부파일을 한곳에서 확인하고, 발신자와 파일 형식으로 좁혀보세요.</p></article>
+      <article class="feature-card"><span class="feature-mark">IMG</span><h2>이미지 한눈에 보기</h2><p>메일 본문에 포함된 이미지를 썸네일로 살펴보고 필요한 이미지를 빠르게 찾으세요.</p></article>
+      <article class="feature-card"><span class="feature-mark">LINK</span><h2>링크 다시 열기</h2><p>대화에 포함된 링크를 모아보고 해당 링크가 작성된 원문 메일로 바로 이동하세요.</p></article>
+    </section>
+
+    <section class="content-section" aria-labelledby="workflow-title">
+      <p class="section-label">How it works</p>
+      <h2 id="workflow-title">지금 보고 있는 대화에만 집중합니다.</h2>
+      <p>파일트래커는 Gmail에서 현재 선택한 대화를 읽기 전용으로 확인합니다. 메일을 변경하거나 삭제하지 않으며, 필요한 자료를 찾고 다시 여는 기능에만 접근 권한을 사용합니다.</p>
+      <ul class="access-points">
+        <li>Gmail 읽기 전용 권한 사용</li>
+        <li>첨부파일을 사용자가 직접 선택해 저장</li>
+        <li>현재 대화의 발신자·날짜 확인</li>
+        <li>메일 원문으로 바로 이동</li>
+      </ul>
+    </section>
+
+    <section class="content-section" aria-labelledby="privacy-title">
+      <p class="section-label">Privacy first</p>
+      <h2 id="privacy-title">이메일 내용은 토솔로 서버에 저장하지 않습니다.</h2>
+      <p>이메일, 첨부파일, 이미지, 링크와 검색 결과는 사용자 기기에서만 처리됩니다. 서버에는 31일 무료 이용과 구매한 이용권을 관리하는 데 필요한 최소한의 계정 정보만 저장합니다.</p>
+      <ul class="trust-points">
+        <li>이메일 내용 및 첨부파일 서버 저장 없음</li>
+        <li>광고 및 행동 분석 도구 없음</li>
+        <li>개인 맞춤 광고와 데이터 판매 없음</li>
+        <li>Chrome 웹스토어 Limited Use 준수</li>
+      </ul>
+      <div class="legal-links">
+        <a href="https://tosolo.net/privacy-kr.html">개인정보처리방침</a>
+        <a href="https://tosolo.net/terms-kr.html">이용약관 및 환불 안내</a>
+        <a href="mailto:tosolo.dev@gmail.com">문의: tosolo.dev@gmail.com</a>
+      </div>
+    </section>
+
+    <section class="pricing-note" aria-labelledby="trial-title">
+      <div>
+        <h2 id="trial-title">31일 동안 무료로 사용하세요.</h2>
+        <p>무료 이용 종료 후에는 일회성 평생 이용권으로 계속 사용할 수 있습니다. 자동 결제나 구독은 없으며, 실제 가격과 세금은 구매 전에 Paddle 결제 화면에서 국가별 현지 통화로 표시됩니다.</p>
+      </div>
+      <div class="trial-badge">31 DAYS<small>FREE TRIAL</small></div>
+    </section>
+
+    <footer>
+      <p>&copy; 2026 tosolo. Developed and published by tosolo. All rights reserved.</p>
+    </footer>
+  </main>
+</body>
+</html>
