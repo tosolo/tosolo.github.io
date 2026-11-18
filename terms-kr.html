@@ -10,8 +10,51 @@
   <link rel="alternate" hreflang="ko" href="https://tosolo.net/terms-kr.html">
   <link rel="alternate" hreflang="x-default" href="https://tosolo.net/terms.html">
   <link rel="icon" href="https://tosolo.net/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="legal.css">
   <title>이용약관 - tosolo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { min-height: 100%; background: #181818; }
+    body { color: #fff; font: 15px/1.65 Consolas, "Cascadia Mono", "Courier New", monospace; }
+    a { color: inherit; }
+    .site-header { border-bottom: 1px solid #fff; background: #181818; }
+    .header-inner { width: min(920px, calc(100% - 48px)); min-height: 76px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; text-decoration: none; }
+    .brand img { display: block; width: 106px; height: 44px; object-fit: contain; object-position: left center; filter: brightness(0) invert(1); }
+    .header-nav { display: flex; align-items: center; gap: 18px; }
+    .header-nav a { color: #fff; font-size: 15px; text-underline-offset: 3px; }
+    main, footer { width: min(920px, calc(100% - 48px)); margin: 0 auto; }
+    main { padding: 40px 0 56px; }
+    h1 { margin-top: 4px; font-size: 15px; line-height: 1.65; font-weight: 400; }
+    .intro { max-width: 720px; margin-top: 10px; color: #e0e0e0; font-size: 15px; }
+    .policy-meta { margin-top: 20px; padding: 12px 0; display: flex; flex-direction: column; gap: 8px; border-top: 1px solid #fff; border-bottom: 1px solid #fff; }
+    .meta-item { display: flex; gap: 5px; }
+    .meta-item dt::after { content: ":"; }
+    .meta-item a, .policy-section a, footer a { color: #fff; text-underline-offset: 3px; }
+    .policy-content { margin-top: 24px; }
+    .policy-section { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 6px; padding: 10px 0; }
+    .policy-section + .policy-section { margin-top: 8px; }
+    .section-number, .section-body h2 { font-size: 15px; line-height: 1.65; font-weight: 400; }
+    .section-body h2 { display: inline; }
+    .section-body p, .section-body li { color: #e0e0e0; font-size: 15px; }
+    .section-body p:first-of-type { margin-top: 4px; }
+    .section-body p + p, .section-body p + ul, .section-body p + ol, .section-body ul + p, .section-body ol + p { margin-top: 8px; }
+    .section-body ul, .section-body ol { padding-left: 1.35em; }
+    .section-body li + li { margin-top: 4px; }
+    footer { padding: 16px 0 24px; display: flex; justify-content: space-between; gap: 18px; border-top: 1px solid #fff; color: #e0e0e0; font-size: 15px; }
+    .footer-links { display: flex; gap: 18px; }
+    @media (max-width: 640px) {
+      .header-inner, main, footer { width: calc(100% - 32px); }
+      .header-inner { min-height: 68px; }
+      .brand img { width: 92px; height: 38px; }
+      .header-nav { gap: 10px; }
+      .header-nav a { font-size: 14px; }
+      main { padding: 32px 0 44px; }
+      .policy-meta { padding: 12px 0; }
+      .policy-content { margin-top: 24px; }
+      .policy-section { column-gap: 6px; padding: 14px 0; }
+      footer { flex-direction: column; }
+    }
+  </style>
 </head>
 <body>
   <header class="site-header"><div class="header-inner">
@@ -20,7 +63,7 @@
   </div></header>
   <main>
     <header class="page-header">
-      <p class="eyebrow">Legal</p><h1>이용약관</h1>
+      <h1>이용약관</h1>
       <p class="intro">본 약관은 개구리 도미노와 지메일용 파일트래커를 포함한 토솔로 서비스 이용에 적용됩니다.</p>
       <dl class="policy-meta">
         <div class="meta-item"><dt>제공자</dt><dd>Tosolo("개발자")</dd></div>
@@ -52,3 +95,4 @@
   <footer><div class="footer-links"><a href="https://tosolo.net/ko/">홈</a><a href="https://tosolo.net/privacy-kr.html">개인정보처리방침</a></div><p>&copy; 2026 tosolo</p></footer>
 </body>
 </html>
+
